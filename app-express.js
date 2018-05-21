@@ -2,19 +2,26 @@ const express = require('express');
 const bodyParser = require("body-parser");          /// ถ้าจะรับค่าจาก body :: POST จำเป็นต้องใช้ตัวนี้ 
 const app = express();
 const server = require('http').Server(app);
-server.listen(8000);
+const cors = require('cors');
+server.listen(3000);
 
 const birds = require('./birds');
+const user = require('./controller/user');
+const login = require('./controller/login');
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }))
 
 app.use(express.static('web'));     /// folder อะไรก็ได้ อ้างอิงให้ถูกก็พอ 
-console.log("server running port 8000");
+console.log("server running port 3000");
 
 app.use('/birds', birds);
+app.use("/api/v1/user", user);
+app.use("/api/v1/login", login);
+
 
 app.get('/te*', function (req, res, next) {
     console.log("ดีจ้า ");

@@ -1,12 +1,23 @@
 version: '3'
 services: 
-  my_sample_server:
-    image: sample-server:2.0
-    ports:
-      - 8000:8000
-  my_web_server:
-    image: nginx:latest
-    volumes: 
-      - /d/Train/Node.js/practice/sample-server/web:/usr/share/nginx/html/nginx
-    ports:
-      - 8080:80
+  # my_sample_server:
+  #   image: sample-server:2.0
+  #   ports:
+  #     - 8000:8000
+  # my_web_server:
+  #   image: nginx:latest
+  #   volumes: 
+  #     - /d/Train/Node.js/practice/sample-server/web:/usr/share/nginx/html/nginx
+  #   ports:
+  #     - 8080:80
+    my-db-server: 
+      image: mysql:5.5.60
+      ports: 
+        - 3306:3306
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: issue_db
+        MYSQL_USER: issue
+        MYSQL_PASSWORD: issue
+#      volumes:
+#        - /c/Users/wien/train/node.js/sample-server/mysql:/var/lib/mysql
